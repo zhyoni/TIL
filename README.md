@@ -1,2 +1,2 @@
 # hyoni-javascript
-효니 JavaScript 공부 \1F337
+효니 JavaScript 공부 &#127799;
