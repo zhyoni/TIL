@@ -1,2 +1,2 @@
-# hyoni-javascript
-Today I Learned(TIL) &#127799;
+# Today I Learned(TIL)
+효니야 공부하자 &#127799;
