@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>멀티체크박스</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    body {
+      margin: 20px;
+    }
+
+    .dropdown-group {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-btn {
+      position: relative;
+      display: block;
+      min-width: 130px;
+      height: 2.5rem;
+      padding: 0 1rem;
+      border: 1px solid #aaa;
+      font-size: .875rem;
+      text-align: left;
+      cursor: pointer;
+      background: yellowgreen;
+    }
+
+    .dropdown-box {
+      position: absolute;
+      overflow: hidden;
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #aaa;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .dropdown-box li {
+      color: #666;
+      padding: 0 8px;
+      margin: 4px 0 0;
+      font-size: .875rem;
+    }
+
+    .dropdown-group>.dropdown-btn:after {
+      position: absolute;
+      content: "";
+      top: 14px;
+      right: 13px;
+      width: 6px;
+      height: 6px;
+      border-bottom: 1px solid #000;
+      border-right: 1px solid #000;
+      transform: rotate(45deg);
+      -webkit-transition: .3s;
+      transition: .3s;
+    }
+
+    .chk-group label {
+      position: relative;
+      display: inline-block;
+      min-height: 20px;
+      padding-left: 24px;
+    }
+
+    input {
+      min-width: 3.75rem;
+      height: 2.5rem;
+      border: 0.0625rem solid #aaa;
+      padding: 0.5rem;
+      font-size: 0.875rem;
+      line-height: normal;
+      vertical-align: middle;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .chk-group input {
+      position: absolute;
+      left: -11px;
+      /* opacity: 0; */
+      cursor: pointer;
+      height: 20px;
+      width: 10px;
+      z-index: 10;
+
+    }
+
+    .chk {
+      position: absolute;
+      left: 2px;
+      height: 16px;
+      width: 16px;
+      border: 1px solid rgba(170, 170, 170, 0.8);
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dropdown-group">
+    <button class="dropdown-btn">언어</button>
+    <ul class="dropdown-box chk-wrap">
+      <li class="chk-group">
+        <input class="chk-all" type="checkbox" name="all" id="all" /> <label for='all'> 모두 선택 <span class="chk"></span></label>
+      </li>
+      <li class="chk-group">
+        <input type="checkbox" name="box" id="box_1" value="1" /> <label for="box_1"> KOR <span class="chk"></span></label>
+      </li>
+      <li class="chk-group">
+        <input type="checkbox" name="box" id="box_2" value="2" /> <label for="box_2"> ENG <span class="chk"></span></label>
+      </li>
+      <li class="chk-group">
+        <input type="checkbox" name="box" id="box_3" value="3" /> <label for="box_3"> GER <span class="chk"></span></label>
+      </li>
+    </ul>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    //  * dropdown
+    $('.dropdown-btn').on('click', function () {
+      $(this).next(".dropdown-box").stop().slideToggle(500)
+    });
+
+    //  * checkbox
+    // * 전체선택  
+    $('.chk-all').on('click', function () {
+      var $chkWrap = $(this).closest(".chk-wrap")
+      $(this).prop("checked") ?
+        $chkWrap.find("input[type=checkbox]").prop("checked", true) :
+        $chkWrap.find("input[type=checkbox]").prop("checked", false);
+    });
+
+    $("input[type=checkbox]").click(function () {
+      var $chkWrap = $(this).closest(".chk-wrap");
+
+      if (!$(this).prop("checked")) {
+        $chkWrap.find(".chk-all").prop("checked", false);
+      } else {
+        if (!$chkWrap.find(".chk-all").prop("checked")) {
+          var $chkLength = $chkWrap.find("input[type=checkbox]").length;
+          var $chkSelectLength = $chkWrap.find("input[type=checkbox]:checked").length;
+          if ($chkLength - 1 === $chkSelectLength) $chkWrap.find(".chk-all").prop("checked", true);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
