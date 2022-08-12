@@ -1,0 +1,47 @@
+.gnb{
+  width:200px;
+  height:100vh;
+  background-color: #000;
+}
+.gnb a{
+  display: block;
+  color:#fff;
+  padding: 10px 0 10px 15px;
+}
+.gnb > ul{
+  padding-top: 10px;
+}
+
+.gnb ul  li{
+  position: relative;
+}
+.gnb>ul>li>ul a{
+  padding-left: 25px;
+}
+.gnb .thr-dep a{
+  padding-left:40px;
+}
+.gnb ul li.active a {
+  background: #7386ed;
+  color: #fff;
+  font-weight: bold;
+}
+.gnb ul li a>i {
+  display: inline-block;
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  margin-top: -6px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #f0f0f0;
+  border-width: 1px 0 0 1px;
+  transform: rotate(225deg);
+  transition: .5s;
+}
+
+.gnb ul li a>i.rotate {
+  transform: rotate(45deg);
+
+}
+.sub-gnb{display: none;}
