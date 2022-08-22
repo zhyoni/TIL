@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popup</title>
+  <link rel="stylesheet" href="../json/popup.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- <ul class="contents">
+      <li>
+        <figure><img src="" alt=""></figure>
+        <h2></h2>
+        <button class="btn-popup-open">자세히 보기 ></button>
+      </li>
+    </ul> -->
+  </div>
+
+  <aside class="popup-wrap" id="popupView">
+    <!-- <div class="popup-alert">
+      <header class="popup-header">
+        <button type="button" class="btn-popup-close">팝업닫기</button>
+      </header>
+      <section class="popup-body">
+        <h3 class="popup-title">팝업 타이틀</h3>
+        <div class="popup-body-area">
+          <div class="popup-source">
+            <video class="popup-movie" preload="none" poster="../json/movie/thumnail/webdrama1.jpg" controls="controls">
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+          <dl class="popup-content">
+            <dt class="popup-content-tit">popup-title</dt>
+            <dd class="popup-content-txt">popup-text</dd>
+          </dl>
+        </div>
+      </section>
+      <div class="popup-btn">
+        <a href="#none">바로가기</a>
+      </div>
+    </div> -->
+  </aside>
+  <script src="../../lib/jquery-3.4.1.min.js"></script>
+  <script>
+    $(function () {
+
+      $.ajax({
+        url: "../json/ex.json",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+          let str = JSON.stringify(data);
+          popupCreate(data);
+          contentsList(data);
+          // 팝업 열기
+          $(document).on('click', ".btn-popup-open", function () {
+            $('#popupView').css({ 'display': 'block' });
+          });
+
+          // 팝업 닫기
+          $(document).on('click', ".btn-popup-close", function () {
+            $('#popupView').css({ 'display': 'none' });
+          });
+
+        }
+      });
+
+      var text = {
+        'ko': ['자세히 보기', '총 ', '개', '작품소개', '팀장', '팀원', '인스타그램에서 보기']
+      }
+
+      function contentsList(jsonObj) {
+        var htmlWrap = document.querySelector('.wrap');
+        for (var i = 0; i < jsonObj.length; i++) {
+          var imgSource = jsonObj[i].source;
+          var dataTitle = jsonObj[i].title;
+
+          var htmlUl = document.createElement('ul'); // ul
+          var htmlList = document.createElement('li'); //li
+          var htmlFigure = document.createElement('figure'); // figure
+          var htmlImg = document.createElement('img'); // img
+          var htmlH2 = document.createElement('h2'); // h2
+          var htmlButton = document.createElement('button');//btn-popup-open
+
+          // 데이터 적용
+          htmlButton.className = 'btn-popup-open';
+          htmlH2.className = 'title';
+          htmlImg.setAttribute('src', '../json/movie/thumnail/' + imgSource);
+          htmlButton.setAttribute('data-popup', 'popup' + i);
+          htmlH2.textContent = dataTitle;
+          htmlButton.textContent = text.ko[0];
+
+          htmlWrap.appendChild(htmlUl);
+          htmlUl.appendChild(htmlList);
+          htmlList.appendChild(htmlFigure);
+          htmlFigure.appendChild(htmlImg);
+          htmlList.appendChild(htmlH2);
+          htmlList.appendChild(htmlButton);
+
+        }
+
+      }
+
+      function popupCreate(jsonObj) {
+
+        var popup = document.querySelector('#popupView');
+        var popupTitle = jsonObj[0].title;
+
+        var popupH3 = document.createElement('h3'); //popup-title
+
+        // console.log(popup, jsonObj);
+        var popupAlert = document.createElement('div'); // popup-alert
+        var popupHeader = document.createElement('header'); //popup-header
+        var popupBtn = document.createElement('button'); //btn-popup-close
+        var popupSection = document.createElement('section'); //popup-body
+        var popupSectionArea = document.createElement('div'); // popup-body-area
+        var popupsource = document.createElement('div'); //popup-source
+        var popupLink = document.createElement('div'); //popup-btn
+        var popupLinkA = document.createElement('a'); // a
+
+        popupAlert.className = 'popup-alert';
+        popupHeader.className = 'popup-header';
+        popupBtn.className = 'btn-popup-close';
+        popupSection.className = 'popup-body';
+        popupSectionArea.className = 'popup-body-area';
+        popupsource.className = 'popup-source';
+        popupLink.className = 'popup-btn';
+        popupLinkA.setAttribute('target', '_blank');
+        popupH3.className = 'popup-title';
+
+
+        // console.log(jsonObj[i].title)
+        popupH3.textContent = popupTitle; // 청혼
+        console.log('popupH3', popupH3)
+
+        popupLinkA.innerHTML = text.ko[0];
+
+        popup.appendChild(popupAlert);
+        popupAlert.appendChild(popupHeader);
+        popupHeader.appendChild(popupBtn);
+        popupAlert.appendChild(popupSection);
+        popupSection.appendChild(popupH3);
+        popupSection.appendChild(popupSectionArea);
+        popupSectionArea.appendChild(popupsource);
+        popupAlert.appendChild(popupLink);
+        popupLink.appendChild(popupLinkA);
+
+        // video 적용
+        var popupsourceVideo = document.createElement('video'); //popup-movie
+        var videoSource = document.createElement('source'); //popup-source
+        popupsourceVideo.className = 'popup-movie';
+        popupsourceVideo.setAttribute('preload', 'none');
+        popupsourceVideo.setAttribute('poster', '../json/movie/thumnail/' + jsonObj[0].thumnail);
+        popupsourceVideo.setAttribute('controls', 'controls');
+
+        popupsource.appendChild(popupsourceVideo);
+        popupsourceVideo.appendChild(videoSource);
+
+
+        for (var dl = 0; dl < 3; dl++) {
+          var popupDl = document.createElement('dl');
+          var popupDt = document.createElement('dt');
+          var popupDd = document.createElement('dd');
+
+          popupDl.className = 'popup-content';
+          popupDt.className = 'popup-content-tit';
+          popupDd.className = 'popup-content-txt';
+
+          popupSectionArea.appendChild(popupDl);
+          popupDl.appendChild(popupDt);
+
+          // console.log('text', text)
+          // console.log('text.ko', text.ko[0])
+          // console.log(text1[3])
+          // 데이터 적용
+          // popupDt.textContent = "hi";
+          if (dl == '0') {
+            popupDl.appendChild(popupDd);
+            popupDt.textContent = text.ko[3];
+            // popupDd.textContent = jsonObj[0].description;
+            popupDd.textContent = jsonObj[0].description;
+          } else if (dl == '1') {
+            popupDl.appendChild(popupDd);
+            popupDt.textContent = text.ko[4];
+            popupDd.textContent = jsonObj[0].leader_name;
+          } else if (dl == '2') {
+            popupDl.appendChild(popupDd);
+            popupDt.textContent = text.ko[5];
+            popupDd.textContent = jsonObj[0].members_name;
+
+          }
+          // console.log(`popupDd:${popupDd.lang}`)
+        }
+
+      };
+
+
+    });
+  </script>
+</body>
+
+</html>
