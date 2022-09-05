@@ -21,6 +21,7 @@ const countDown = function () {
   const hour = minute * 60 //시간60
   const day = hour * 24 //일24
 
+  //Math.floor() 함수는 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환합니다.
   let days = Math.floor(target / day);
   let hours = Math.floor((target % day) / hour);
   let minutes = Math.floor((target % day % hour) / minute);
@@ -32,7 +33,7 @@ const countDown = function () {
   $p.textContent = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다`
 
   if (target <= 0) {
-    $h1.textContent = "퇴근!!";
+    $h1.textContent = "D-day까지";
     clearInterval(timer);
     $p.textContent = `00일 00시간 00분 00초`
   }

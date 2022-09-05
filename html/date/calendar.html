@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>달력 만들기</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .calendar-wrap {
+      width: 600px;
+      margin: 100px;
+      padding: 20px;
+      border: 1px solid rgb(179, 179, 179);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 20px;
+    }
+
+    .calendar-title {
+      padding: 0 80px 0px;
+      font-size: 30px;
+    }
+
+    .calendar-month {
+      display: flex;
+    }
+
+    .calendar-month button {
+      display: block;
+      width: 60px;
+      padding: 8px;
+      margin: 2px;
+      border-radius: 5px;
+      border: 1px solid rgb(163, 106, 255);
+      background-color: transparent;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .calendar-month .today {
+      width: 80px;
+      color: #fff;
+      background-color: rgb(151, 76, 250);
+    }
+
+    .calendar-day {
+      display: flex;
+    }
+
+    .day {
+      width: calc((100% -10px)/7);
+      text-align: center;
+      padding: 10px;
+      background-color: rgb(250, 249, 249);
+    }
+
+    .calendar-days {
+      display: flex;
+      flex-flow: row wrap;
+      height: 500px;
+    }
+
+    .date {
+      width: calc(100% / 7);
+      padding: 15px;
+      text-align: right;
+      border: 1px solid #8f8f8f;
+    }
+
+    .day:nth-child(7n + 1),
+    .date:nth-child(7n + 1) {
+      color: #D13E3E;
+    }
+
+    .day:nth-child(7n),
+    .date:nth-child(7n) {
+      color: #396EE2;
+    }
+
+    .other {
+      opacity: .3;
+    }
+
+    .today {
+      position: relative;
+      color: #FFFFFF;
+    }
+
+    .today::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+      display: block;
+      width: 30px;
+      height: 30px;
+      background-color: #9c4edb;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      content: '';
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calendar-wrap">
+    <header class="calendar-header">
+      <h1 class="calendar-year-month">year-month</h1>
+      <nav class="calendar-month">
+        <button type="button" class="btn-prev" onclick="prevMonth()">이전달</button>
+        <button type="button" class="today" onclick="thisMonth()">Today</button>
+        <button type="button" class="btn-next" onclick="nextMonth()">다음달</button>
+      </nav>
+    </header>
+    <ul class="calendar-day">
+      <li class="day">일</li>
+      <li class="day">월</li>
+      <li class="day">화</li>
+      <li class="day">수</li>
+      <li class="day">목</li>
+      <li class="day">금</li>
+      <li class="day">토</li>
+    </ul>
+    <div class="calendar-days"></div>
+  </div>
+
+  <script src="../../lib/jquery-3.4.1.min.js"></script>
+  <script src="../date/js/calendar_ex.js"></script>
+</body>
+
+</html>
