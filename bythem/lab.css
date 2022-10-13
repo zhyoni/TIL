@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: normal;
+}
+
+.lab-wrap {
+  padding: 0 15px;
+}
+
+/* ------------------------
+lab-header 공통
+------------------------- */
+.lab-header {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lab-header h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.lab-header .link-group {
+  position: relative;
+  width: 40%;
+}
+
+.lab-header .link-group a {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #999;
+}
+
+.lab-contents {
+  width: 100%;
+}
+
+.lab-list {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.project-contents {
+  position: relative;
+  width: 100%;
+  height: 125vw;
+  z-index: 10;
+}
+
+.project-hover-group {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 3rem;
+  transition: .5s ease;
+}
+
+.project-title {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  left: 0;
+  padding: 0 3rem;
+  font-size: 6.667vw;
+  font-weight: 600;
+  word-break: keep-all;
+  color: #fff;
+}
+
+.project-description {
+  opacity: 0;
+  margin: 140px 0;
+  font-size: 3.333vw;
+  line-height: 1.71;
+  color: #333;
+}
+
+.project-contents::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .6) 100%);
+  content: "";
+}
+
+.project-hover-group .link-group {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+.project-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.project-contents:hover .project-hover-group {
+  background-color: #fccc14;
+}
+
+.project-contents:hover .project-title {
+  top: 20px;
+  color: #000;
+  transform: translateY(20px);
+  transition: transform .4s .2s ease;
+}
+
+.project-contents:hover .project-description {
+  opacity: 1;
+  margin: 160px 0;
+  transition: all .4s .4s ease;
+}
+
+.lab-header .link-group {
+  position: relative;
+}
+
+/* ---------------------------
+ .arrow-right
+------------------------ */
+.arrow-right {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+  transform: rotate(45deg);
+  transition: .4s ease;
+}
+
+.lab-header .link-group .arrow-right {
+  right: -14px;
+  bottom: 4px;
+}
+
+.project-hover-group .link-group .arrow-right {
+  position: absolute;
+  bottom: 4px;
+  left: 80px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+}
+
+.project-contents:hover .project-hover-group .link-group .arrow-right {
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+  left: 90px;
+  transition: .4s ease .1s;
+}
+
+.project-contents:hover .project-hover-group .link-group a {
+  color: #000;
+}
+
+.lab-header .link-group a:hover {
+  color: #fccc14;
+}
+
+.lab-header .link-group a:hover .arrow-right {
+  border-top: 1px solid #fccc14;
+  border-right: 1px solid #fccc14;
+  right: -24px;
+}
+
+
+/* --------------------------
+  반응형
+--------------------------- */
+@media(min-width:769px) {
+  .lab-wrap {
+    padding: 0 60px;
+  }
+
+  .lab-header {
+    padding: 30px 0;
+  }
+
+  .lab-contents {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .lab-list {
+    width: calc(50% - 20px);
+    margin-bottom: 40px;
+  }
+
+  .mg-right {
+    margin-right: 20px;
+  }
+
+  .project-hover-group {
+    padding: 0px 40px;
+  }
+
+  .project-contents {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .project-title {
+    font-size: 26px;
+    padding: 0 40px;
+  }
+
+  .project-description {
+    font-size: 14px;
+  }
+
+}
+
+@media(min-width:1400px) {
+  .lab-header {
+    padding: 40px 5.92rem;
+    width: 1400px;
+    margin: 0 auto;
+  }
+
+  .lab-list {
+    width: calc(25% - 20px);
+  }
+
+  .mg-right {
+    margin-right: 0px;
+  }
+
+  .project-title {
+    font-size: 28px;
+  }
+
+  .lab-header .link-group a {
+    right: 20px;
+    font-size: 16px;
+  }
+
+  .project-link {
+    font-size: 14px;
+  }
+
+  .project-description {
+    margin: 150px 0;
+  }
+
+  .project-contents:hover .project-description {
+    transform: translateY(20px);
+    transition: all .5s ease .4s;
+  }
+}
+
+@media(min-width:361px) and (max-width:769px) {
+  .project-title {
+    /* padding: 0 40px; */
+    font-size: 24px;
+  }
+
+  .project-description {
+    font-size: 14px;
+  }
+}
+
+@media(max-width:280px) {
+  .project-description {
+    margin: 110px 0;
+  }
+
+  .project-contents:hover .project-description {
+    margin: 130px 0;
+  }
+}
