@@ -42,6 +42,16 @@
 * 달력 만들기 [calendar.html](html/date/calendar.html) / [calendar_ex.js](html/date/calendar_es.js)
 * 드롭다운 메뉴(json) [dropdown.html](html/json/dropdown/dropdown.html)
 
+##### basic
+* variable [variable.js](javascript/basic/js/variable.js)
+* operator [operator.js](javascript/basic/js/operator.js)
+* object [object.js](javascript/basic/js/object.js)
+* json [json.js](javascript/basic/js/json.js)
+* function [function.js](javascript/basic/js/function.js)
+* array [array.js](javascript/basic/js/array.js)
+* array [array-ex.js](javascript/basic/js/array-ex.js)
+* array_api [array_api.js](javascript/basic/js/array_api.js)
+
 <br/>
 
 ### jQuery
