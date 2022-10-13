@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인터렉션구현연습</title>
+</head>
+
+<body>
+  <ul class="slide">
+    <li><img src="https://images.unsplash.com/photo-1665039606013-705f67c80784?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDR8Q0R3dXdYSkFiRXd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1664538605442-1f50e5eebb2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE5fENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1664153672195-e28003d3ec1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDc5fENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1665039606029-bfa88187e71f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8Q0R3dXdYSkFiRXd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt=""></li>
+  </ul>
+  <ul class="slide1">
+    <li><img src="https://images.unsplash.com/photo-1665039606013-705f67c80784?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDR8Q0R3dXdYSkFiRXd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1664538605442-1f50e5eebb2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDE5fENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1664153672195-e28003d3ec1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDc5fENEd3V3WEpBYkV3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt=""></li>
+    <li><img src="https://images.unsplash.com/photo-1665039606029-bfa88187e71f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8Q0R3dXdYSkFiRXd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt=""></li>
+  </ul>
+  <!-- <button class="test1">다음 이미지</button>
+  <button class="test2">이전 이미지</button> -->
+  <script src="../../../lib/jquery-3.4.1.min.js"></script>
+  <script src="slide.js"></script>
+  <script>
+    // 슬라이드 생성
+    var mySlider1 = new MySlider('.slide');
+    var mySlider2 = new MySlider('.slide1');
+
+    // // 테스트 1번
+    // $('.test1').on('click', function () {
+    //   mySlider1.next() // mySlider1객체에 next메써드 호출
+    // })
+    // // 테스트 2번
+    // $('.test2').on('click', function () {
+    //   mySlider1.prev() // mySlider2객체에 prev메써드 호출
+    // })
+// {
+//     var obj = {
+//       "name": "효니",
+//       "sayHello": function () {
+//         // this = obj
+//         // var that = this; 
+//         setTimeout(() => { // 화살표함수를 사용하면 this가 유지된다.
+//           //this = obj
+//           console.log("안녕하세요?" + this.name + "입니다.");
+//         }, 3000)
+//         // setTimeout(function () { // 이 함수는 메써드가 아니기 때문에 
+//         //   //   //this != obj
+//         //   //   console.log("안녕하세요?" + this.name + "입니다.");
+//         //   console.log("안녕하세요?" + that.name + "입니다.");
+//         // }, 3000)
+//         // console.log("안녕하세요?" + this.name + "입니다.");
+//       }
+//     }
+//     obj.sayHello();}
+  </script>
+</body>
+
+</html>
