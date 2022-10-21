@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dropdown</title>
+  <link rel="stylesheet" href="../../../lib/reset.css">
+  <link rel="stylesheet" href="../dropdown/dropdown.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="contents-wrap">
+      <!-- <div class="dropdown-group">
+        <button class="dropdown-btn">👑 A등급 
+          <i class="ic"></i>
+        </button>
+        <ul class="dropdown-box">
+          <li class="dropdown-option">👑 A등급  <i class="ic"></i></li>
+          <li class="dropdown-option">👑 B등급  <i class="ic"></i></li>
+          <li class="dropdown-option">👑 C등급  <i class="ic"></i></li>
+          <li class="dropdown-option">👑 D등급  <i class="ic"></i></li>
+        </ul>
+      </div>
+      <dl class="content-box">
+        <dt>A등급 평가금액</dt>
+        <dd class="color-primary">10,000원</dd>
+        <dt>액정</dt>
+        <dd>미세한 흠집</dd>
+        <dt>뒷판(측면)</dt>
+        <dd>미세한 흠집</dd>
+        <dt>잔상</dt>
+        <dd>정상</dd>
+        <dt>지문/FACE ID</dt>
+        <dd>정상</dd>
+      </dl> -->
+    </div>
+  </div>
+
+  <script src="../../../lib/jquery-3.4.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      // let promise = fetch(url, [options])
+      // url – 접근하고자 하는 URL
+      // options – 선택 매개변수, method나 header 등을 지정할 수 있음
+      // options에 아무것도 넘기지 않으면 요청은 GET 메서드로 진행되어 url로부터 콘텐츠가 다운로드 됩니다.
+      //   fetch()를 호출하면 브라우저는 네트워크 요청을 보내고 프라미스가 반환됩니다.반환되는 프라미스는 fetch()를 호출하는 코드에서 사용됩니다.
+
+      // 전역변수
+      let defaultDevice = 'iphone'; // iphone / android
+      let defaultRank = 'A';
+      let item = 4;
+      fetch('find.json')
+        .then(function (respone) {
+          return respone.text(); //response.text() : 응답을 읽고 텍스트를 반환한다.
+        })
+        .then(function (data) {
+          createList(data);
+          changeList(data)
+          dropdown()
+          // document.getElementsByTagName('dd')[0].textContent = '10,000'
+
+          // var $dd1 = document.querySelector('dd')
+          // var $dd2 = document.querySelectorAll('dd')
+          // var $dd3 = $('dd')[0]
+          var $dd4 = $('dd').eq(0)
+          // var $dd = $('dd')
+          // console.log(1, $dd1)
+          // console.log(2, $dd2)
+          // console.log(document.getElementsByTagName('dd')[0])
+          // console.log(3, $dd3)
+          // console.log(4, $dd4)
+          // console.log(5, $dd)
+
+          // // $dd.textContent = '10000'; // X
+          $dd4.text('10,000');
+
+
+        });
+
+      function createList(data) {
+        const jsonObj = JSON.parse(data); //json문자열 객체로 변환
+        let rank = Object.keys(jsonObj[defaultDevice]);
+        let keys = Object.keys(jsonObj[defaultDevice][defaultRank]);
+        let values = Object.values(jsonObj[defaultDevice][defaultRank]);
+
+        // console.log('json', jsonObj, '\n rank', rank, '\n keys', keys, 'values', values)
+
+        const contentsWrap = document.querySelector('.contents-wrap');
+        const dropdownGroup = document.createElement('div') //.dropdown-group
+        const dropdownBtn = document.createElement('button') //.dropdown-btn
+        const dropdownUl = document.createElement('ul') //.dropdown-box
+        const icon = document.createElement('i') //.ic
+
+        dropdownGroup.className = 'dropdown-group';
+        dropdownBtn.className = 'dropdown-btn';
+        dropdownUl.className = 'dropdown-box';
+        icon.className = 'ic';
+        dropdownBtn.textContent = `👑 ${defaultRank}`;
+
+        for (let i = 0; i < rank.length; i++) {
+          const dropdownList = document.createElement('li') //.dropdown-option
+
+          dropdownList.className = 'dropdown-option';
+          dropdownList.id = rank[i];
+          dropdownList.textContent = `👑 ${rank[i]}`;
+          dropdownUl.appendChild(dropdownList);
+        };
+
+        for (let i = 0; i < keys.length; i += item) {
+          const $dl = document.createElement('dl') //.content-box
+          $dl.className = 'content-box';
+          for (let a = i; a < i + item; a++) {
+            console.log("a", a)
+            let $dt = document.createElement('dt');
+            let $dd = document.createElement('dd');
+            $dt.textContent = keys[a];
+            $dd.textContent = values[a];
+            // console.log('1', $dd)
+            // console.log("i:", i)
+            // console.log('key:', keys[i])
+            // console.log('values:', values[i])
+            $dl.appendChild($dt)
+            $dl.appendChild($dd)
+          }
+          contentsWrap.appendChild($dl);
+        }
+
+
+
+        // console.log(keys.length)
+        // console.log(rank.length)
+        // console.log(values)
+        // var $dd1 = $('dd');
+        contentsWrap.appendChild(dropdownGroup);
+        dropdownGroup.appendChild(dropdownBtn);
+        dropdownGroup.appendChild(dropdownUl);
+        dropdownGroup.appendChild(icon);
+        // console.log(3, $('dd'))
+      }
+
+      function changeList(data) {
+        const jsonObj = JSON.parse(data); //json문자열 객체로 변환
+        $('li').on('click', function (e) {
+
+          let level = e.target.id // 이벤트가 발생한 요소의 속성
+          let changeKeys = Object.keys(jsonObj[defaultDevice][level]);
+          let changeValues = Object.values(jsonObj[defaultDevice][level]);
+
+          for (j = 0; j < changeKeys.length; j++) {
+            $('dl').find('dt').eq(j).text(changeKeys[j])
+            $('dl').find('dd').eq(j).text(changeValues[j])
+          }
+        });
+
+      }
+
+      function dropdown() {
+        $('.dropdown-btn').on('click', function (e) {
+          e.stopPropagation();
+          $(this).next(".dropdown-box").stop().slideToggle(400);
+          $('.ic').addClass('is-active')
+        });
+        $('.contents-wrap').on('click', function (e) {
+          e.stopPropagation();
+          $('.dropdown-btn').next(".dropdown-box").stop().slideToggle(400);
+          $('.ic').removeClass('is-active')
+        });
+        $('.dropdown-option').on('click', function () {
+          const value = $(this).text();
+          $('.dropdown-btn').text(value)
+        })
+      };
+
+    });
+  </script>
+</body>
+
+</html>

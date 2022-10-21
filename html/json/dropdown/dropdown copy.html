@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dropdown</title>
+  <link rel="stylesheet" href="../../../lib/reset.css">
+  <link rel="stylesheet" href="../dropdown/dropdown.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="contents-wrap">
+      <!-- contents -->
+    </div>
+  </div>
+
+  <script src="../../../lib/jquery-3.4.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      // let promise = fetch(url, [options])
+      // url – 접근하고자 하는 URL
+      // options – 선택 매개변수, method나 header 등을 지정할 수 있음
+      // options에 아무것도 넘기지 않으면 요청은 GET 메서드로 진행되어 url로부터 콘텐츠가 다운로드 됩니다.
+      //   fetch()를 호출하면 브라우저는 네트워크 요청을 보내고 프라미스가 반환됩니다.반환되는 프라미스는 fetch()를 호출하는 코드에서 사용됩니다.
+
+      // 전역변수
+      let defaultDevice = 'iphone'; // iphone / android
+      let defaultRank = 'A';
+      let item = 4;
+      fetch('find.json')
+        .then(function (respone) {
+          return respone.text(); //response.text() : 응답을 읽고 텍스트를 반환한다.
+        })
+        .then(function (data) {
+          createList(data);
+          changeList(data);
+          dropdown()
+
+        });
+
+      function createList(data) {
+        const jsonObj = JSON.parse(data); //json문자열 객체로 변환
+        let rank = Object.keys(jsonObj[defaultDevice]);
+        let keys = Object.keys(jsonObj[defaultDevice][defaultRank]);
+        let values = Object.values(jsonObj[defaultDevice][defaultRank]);
+        console.log('rank:', rank);
+        console.log('keys:', keys);
+        console.log('values:', values);
+
+        // dropDown 생성
+        let wrap = document.querySelector('.contents-wrap');
+        let dropGroup = document.createElement('div'); // dropdown-group
+        let dorpBtn = document.createElement('button'); //dropdown-btn
+        let dropUl = document.createElement('ul'); //dropdown-box
+        let icon = document.createElement('i'); //ic
+
+        // class
+        dropGroup.className = 'dropdown-group';
+        dorpBtn.className = 'dropdown-btn';
+        dropUl.className = 'dropdown-box';
+        icon.className = 'ic';
+
+        dorpBtn.textContent = defaultRank;
+
+        wrap.appendChild(dropGroup);
+        dropGroup.appendChild(dorpBtn);
+        dropGroup.appendChild(dropUl);
+        dropGroup.appendChild(icon);
+
+        for (let i = 0; i < rank.length; i++) {
+          const dropList = document.createElement('li'); //.dropdown-option
+          dropList.className = 'dropdown-option';
+          dropList.id = rank[i];
+          dropList.textContent = `${rank[i]}`;
+          // console.log(dropList);
+          dropUl.appendChild(dropList);
+        };
+
+        for (let i = 0; i < keys.length; i += item) {
+          let dropDl = document.createElement('dl'); //content-box
+          dropDl.className = 'content-box';
+
+          for (let j = i; j < i + item; j++) {
+            let dt = document.createElement('dt');
+            let dd = document.createElement('dd');
+            dt.textContent = keys[j];
+            dd.textContent = values[j];
+
+            dropDl.appendChild(dt);
+            dropDl.appendChild(dd);
+          }
+          wrap.appendChild(dropDl);
+        };
+      }
+
+      function changeList(data) {
+        const jsonObj = JSON.parse(data);
+        $('li').on('click', function (e) {
+
+          let level = e.target.id;
+          let changeKeys = Object.keys(jsonObj[defaultDevice][level]);
+          let changeValues = Object.values(jsonObj[defaultDevice][level]);
+          console.log(level)
+          for (let i = 0; i < changeKeys.length; i++) {
+            $('dl').find('dt').eq(i).text(changeKeys[i]);
+            $('dl').find('dd').eq(i).text(changeValues[i]);
+          };
+        });
+      }
+
+      function dropdown() {
+        $('.dropdown-btn').on('click', function (e) {
+          e.stopPropagation();
+          $(this).next(".dropdown-box").stop().slideToggle(400);
+          $('.ic').addClass('is-active')
+        });
+        $('.contents-wrap').on('click', function (e) {
+          e.stopPropagation();
+          $('.dropdown-btn').next(".dropdown-box").stop().slideToggle(400);
+          $('.ic').removeClass('is-active')
+        });
+        $('.dropdown-option').on('click', function () {
+          const value = $(this).text();
+          $('.dropdown-btn').text(value)
+        })
+      };
+
+    });
+  </script>
+</body>
+
+</html>
